@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jz.mysql.executor.write.dao.ExecutorTaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.jz.mysql.executor.write.dao.ExecutorTaskDo">
+
+    </resultMap>
+
+    <insert id="save" parameterType="com.jz.mysql.executor.write.dao.ExecutorTaskDo">
+        insert into executor_task(
+        TASK_ID,
+        TASK_TYPE,
+        TASK_CLASS_NAME,
+        STATUS,
+        <if test="errorCode != null">
+            ERROR_CODE,
+        </if>
+        <if test="errorMessage != null">
+            ERROR_MESSAGE,
+        </if>
+        <if test="retryStatus != null">
+            RETRY_STATUS,
+        </if>
+        TIMES,
+        <if test="nextExecuteTime != null">
+            NEXT_EXECUTE_TIME,
+        </if>
+        <if test="requestDetail != null">
+            REQUEST_DETAIL,
+        </if>
+
+        <if test="resultDetail != null">
+            RESULT_DETAIL
+        </if>
+        UPDATE_TIME,
+        CREATE_TIME
+        )values(
+        #{taskId},
+        #{taskType},
+        #{taskClassName},
+        #{status},
+        <if test="errorCode != null">
+            #{errorCode},
+        </if>
+        <if test="errorMessage != null">
+            #{errorMessage},
+        </if>
+        <if test="retryStatus != null">
+            #{retryStatus},
+        </if>
+        #{times},
+
+        <if test="nextExecuteTime != null">
+            #{nextExecuteTime},
+        </if>
+        <if test="requestDetail != null">
+            #{requestDetail},
+        </if>
+        <if test="resultDetail != null">
+            #{resultDetail}
+        </if>
+        now(),
+        now()
+        )
+    </insert>
+</mapper>
